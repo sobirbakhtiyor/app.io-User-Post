@@ -2,13 +2,9 @@
 
 @section('content')
 
-	<h1 class="page-header">Edit Post</h1>
+	<h1 class="page-header">Create Post</h1>
 
-	<div class="row">
-
-		<div class="col-sm-9">
-
-	{!! Form::model($post, ['method'=>'patch', 'action'=>['AdminPostsController@update', $post->id], 'files'=>'true']) !!}
+	{!! Form::open(['method'=>'post', 'action'=>'AdminPostsController@store', 'files'=>'true']) !!}
 
 		{!! csrf_field() !!}
 		
@@ -42,28 +38,12 @@
 
 		<div class="form-group">
 			
-		{!! Form::submit('Update post', ['class'=>'btn btn-primary col-sm-2']) !!}
+		{!! Form::submit('Create post', ['class'=>'btn btn-primary']) !!}
 
 		</div>
 
 	{!! Form::close() !!}
 
-
-
-	{!! Form::open(['method'=>'delete', 'action'=>['AdminPostsController@update', $post->id]]) !!}
-
-		<div class="form-group">
-			
-		{!! Form::submit('Delete post', ['class'=>'btn btn-danger col-sm-2 pull-right']) !!}
-
-		</div>
-
-	{!! Form::close() !!} 
-
-	</div>
-
-	</div>
-
-	<div class="row">@include('includes.form-errors')</div>
+	@include('includes.form-errors')
 
 @stop

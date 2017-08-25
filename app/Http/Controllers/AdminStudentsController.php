@@ -3,20 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Session;
 
-use App\Http\Requests\PostsCreateRequest;
-
-use App\Post;
-
+use App\Http\Requests\UsersRequest;
+use App\Http\Requests\UsersEditRequest;
+use App\User;
+use App\Role;
 use App\Photo;
 
-use App\Category;
-
-use Illuminate\Support\Facades\Auth;
-
-class AdminPostsController extends Controller
+class AdminStudentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,9 +20,9 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $students = User::whereRoleId(3)->get();
 
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.students.index', compact('students'));
     }
 
     /**
@@ -37,9 +32,9 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        $categories = Category::lists('name', 'id')->all();
+        $roles = Role::lists('name', 'id')->all();
 
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.students.create', compact('roles'));
     }
 
     /**
@@ -48,13 +43,21 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostsCreateRequest $request)
+    public function store(UsersRequest $request)
     {
-        $input = $request->all();
+        if(trim($request->paswword == '')) {
 
-        $user = Auth::user();
+            $input = $request->except('password');
+        } 
 
-        if($file = $request->file('photo_id')) {
+        else {
+
+            $input = $request->all();
+
+        }
+  
+
+       if($file = $request->file('photo_id')) {
 
             $name = time() . $file->getClientOriginalName();
 
@@ -63,12 +66,14 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['file'=>$name]);
 
             $input['photo_id'] = $photo->id;
-        }
+       }
 
-        $user->posts()->create($input);
+       $input['password'] = bcrypt($request->password);
 
-        return redirect('/admin/posts');
-        
+       User::create($input);
+
+       
+       return redirect('/admin/students');
     }
 
     /**
@@ -90,11 +95,11 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
+        $student = User::findOrFail($id);
 
-        $categories = Category::lists('name', 'id')->all();
+        $roles = Role::lists('name', 'id')->all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.students.edit', compact('student', 'roles'));
     }
 
     /**
@@ -104,11 +109,21 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersEditRequest $request, $id)
     {
-        $input = $request->all();
+        $user = User::findOrFail($id);
 
-        $user = Auth::user();
+        if(trim($request->password == '')) {
+
+            $input = $request->except('password');
+        } 
+
+        else {
+
+            $input = $request->all();
+            $input['password'] = bcrypt($request->password);
+
+        }
 
         if($file = $request->file('photo_id')) {
 
@@ -121,11 +136,14 @@ class AdminPostsController extends Controller
             $input['photo_id'] = $photo->id;
         }
 
-        $user->posts()->whereId($id)->first()->update($input);
+        
 
-        Session::flash('updated_post', 'The post with title <b> ' .$input['title'].' </b> was updated');
+        $user->update($input);
 
-        return redirect('/admin/posts');
+        Session::flash('updated_user', $input['name'].'\'s profile has been updated');
+       
+       return redirect('/admin/students');
+
     }
 
     /**
@@ -136,17 +154,16 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        
-        $post = Post::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        $title_of_post = $post->title;
+        $name_of_user = $user->name;
 
-        unlink(public_path() . $post->photo->file);
+        unlink(public_path() . $user->photo->file);
 
-        $post->delete();
+        $user->delete();
 
-        Session::flash('deleted_post', $title_of_post.' has been deleted');
+        Session::flash('deleted_user', $name_of_user.'\'s profile has been deleted');
 
-        return redirect('/admin/posts');
+        return redirect('/admin/students');
     }
 }
