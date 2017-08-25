@@ -21,7 +21,7 @@ class Teacher
 
             if(Auth::user()->isTeacher()) {
 
-                return redirect('/teacher');
+                return $next($request);
 
             }
         }

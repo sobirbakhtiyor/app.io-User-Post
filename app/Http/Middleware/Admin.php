@@ -21,11 +21,11 @@ class Admin
 
             if(Auth::user()->isAdmin()) {
 
-                return redirect('/admin/teachers');
+                return $next($request);
 
             }
         }
-        else {
-        return redirect('/');}
+        
+        return redirect('/');
     }
 }

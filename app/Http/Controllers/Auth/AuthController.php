@@ -30,11 +30,19 @@ class AuthController extends Controller
      */
     // protected $redirectTo = '/admin';
 
-    public function redirectTo() {
+    protected function authenticated($request,$user){
+        if($user->role_id === 1){
+            return redirect()->intended('admin'); //redirect to admin panel
+        }
+
+        elseif($user->role_id === 2){
+            return redirect()->intended('teacher'); //redirect to admin panel
+        }
+
+        return redirect()->intended('/'); //redirect to standard user homepage
+        }
    
-            return '/admin/teachers';
-            
-    }
+
 
     protected $redirectAfterLogout = '/login';
 
