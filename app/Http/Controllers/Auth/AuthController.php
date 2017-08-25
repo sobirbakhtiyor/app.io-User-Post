@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+// use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -28,7 +28,16 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    // protected $redirectTo = '/admin';
+
+    public function redirectTo() {
+   
+            return '/admin/teachers';
+            
+    }
+
+    protected $redirectAfterLogout = '/login';
+
 
     /**
      * Create a new authentication controller instance.

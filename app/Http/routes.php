@@ -20,11 +20,6 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 
-Route::get('/admin', function() {
-
-	return view('admin.index');
-});
-
 
 
 
@@ -32,6 +27,16 @@ Route::group(['middleware'=>'admin'], function() {
 
 	Route::resource('/admin/users', 'AdminUsersController');
 
-	Route::resource('/admin/posts', 'AdminPostsController');
+	Route::resource('/admin/teachers', 'AdminTeachersController');
+
+	Route::resource('/admin/students', 'AdminStudentsController');
+	
+	Route::resource('/admin/subjects', 'AdminSubjectsController');
+
+});
+
+Route::group(['middleware'=>'teacher'], function() {
+
+	Route::resource('/teacher', 'TeacherController');
 
 });

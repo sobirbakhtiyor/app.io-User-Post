@@ -4,6 +4,8 @@ namespace App;
 
 use App\Role;
 
+use App\Subject;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -14,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'photo_id', 'is_active'
+        'name', 'email', 'password', 'role_id', 'photo_id', 'is_active', 'subject_id'
     ];
 
     /**
@@ -30,6 +32,12 @@ class User extends Authenticatable
     public function role() {
 
         return $this->belongsTo('App\Role');
+    }
+
+
+    public function subject() {
+
+        return $this->belongsTo('App\Subject');
     }
 
     
@@ -53,6 +61,17 @@ class User extends Authenticatable
     public function isAdmin() {
 
         if($this->role && $this->role->name == 'admin' && $this->is_active == 1) {
+
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public function isTeacher() {
+
+        if($this->role && $this->role->name == 'teacher' && $this->is_active == 1) {
 
             return true;
         }

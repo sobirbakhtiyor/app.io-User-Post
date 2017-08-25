@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+class Teacher
 {
     /**
      * Handle an incoming request.
@@ -15,17 +15,17 @@ class Admin
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+    {   
 
         if(Auth::check()) {
 
-            if(Auth::user()->isAdmin()) {
+            if(Auth::user()->isTeacher()) {
 
-                return redirect('/admin/teachers');
+                return redirect('/teacher');
 
             }
         }
-        else {
-        return redirect('/');}
+
+        return redirect('/');
     }
 }

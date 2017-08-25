@@ -48,7 +48,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i>  {{ Auth::user()->name }} ({{ Auth::user()->role->name }})  <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -56,7 +56,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -93,7 +93,7 @@
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
-                    </li>{{-- 
+                    </li>
 
 
 
@@ -121,48 +121,9 @@
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
-                    </li> --}}
-
-                    <li>
-                        <a href="#"><i class="fa fa-suitcase fa-fw fa-2x"></i> Teachers<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.teachers.index')}}"><i class="fa fa-list fa-fw"></i> All teachers</a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin.teachers.create')}}"><i class="fa fa-plus fa-fw"></i> Add teacher</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-users fa-fw fa-2x"></i> Students<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.students.index')}}">All students</a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin.students.create')}}">Add student</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-
-                    <li>
-                        <a href="#"><i class="fa fa-book fa-fw fa-2x"></i> Subjects<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.subjects.index')}}">All subjects</a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin.subjects.create')}}">Add subject</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-
-                    {{-- <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Media<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -258,7 +219,7 @@
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
-                    </li> --}}
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
