@@ -35,9 +35,9 @@ class AdminTeachersController extends Controller
     {
         $roles = Role::lists('name', 'id')->all();
 
-        $subject = Subject::lists('name', 'id')->all();
+        $subjects = Subject::lists('name', 'id')->all();
 
-        return view('admin.teachers.create', compact('roles', 'subject'));
+        return view('admin.teachers.create', compact('roles', 'subjects'));
     }
 
     /**

@@ -22,6 +22,8 @@ elixir(function(mix) {
     		'font-awesome.css',
     		'metisMenu.css',
     		'sb-admin-2.css',
+            'material.min.css',
+            'materialize.min.css'
 
 
     		], 'public/css/libs.css')
@@ -34,7 +36,9 @@ elixir(function(mix) {
     		'bootstrap.js',
     		'metisMenu.js',
     		'sb-admin-2.js',
-    		'scripts.js'
+    		'scripts.js',
+            'material.min.js',
+            'materialize.min.js'
 
 
     		], 'public/js/libs.js')
