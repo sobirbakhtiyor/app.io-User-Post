@@ -22,7 +22,7 @@ elixir(function(mix) {
     		'font-awesome.css',
     		'metisMenu.css',
     		'sb-admin-2.css',
-            'material.min.css',
+            // 'material.min.css',
             'materialize.min.css'
 
 
@@ -37,7 +37,7 @@ elixir(function(mix) {
     		'metisMenu.js',
     		'sb-admin-2.js',
     		'scripts.js',
-            'material.min.js',
+            // 'material.min.js',
             'materialize.min.js'
 
 

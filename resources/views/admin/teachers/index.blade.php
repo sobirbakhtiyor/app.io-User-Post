@@ -1,4 +1,4 @@
-<!-- @extends('layouts.admin')
+@extends('layouts.admin')
 
 
 @section('content')
@@ -103,4 +103,4 @@
   </tbody>
 </table>
 
-@stop -->
+@stop
